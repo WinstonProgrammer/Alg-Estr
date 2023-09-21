@@ -58,4 +58,43 @@ public class Postfija {
                 return -1;
         }
     }
+
+    public static String calcularPostfija(String postfija) {
+        Stack<Integer> pila = new Stack<>();
+
+        int n = postfija.length();
+        for (int i = 0; i < n; i++) {
+            char c = postfija.charAt(i);
+
+            if (Character.getNumericValue(c) != -1) {
+                pila.push(Character.getNumericValue(c));
+            }
+            else if (c == '+') {
+                int operando2 = pila.pop();
+                int operando1 = pila.pop();
+                pila.push(operando1 + operando2);
+            }
+            else if (c == '-') {
+                int operando2 = pila.pop();
+                int operando1 = pila.pop();
+                pila.push(operando1 - operando2);
+            }
+            else if (c == '*') {
+                int operando2 = pila.pop();
+                int operando1 = pila.pop();
+                pila.push((operando1 * operando2));
+            }
+            else if (c == '/') {
+                int operando2 = pila.pop();
+                int operando1 = pila.pop();
+                pila.push(operando1 / operando2);
+            }
+            else if (c == '^') {
+                int operando2 = pila.pop();
+                int operando1 = pila.pop();
+                pila.push((int)Math.pow(operando1, operando2));
+            } 
+        }
+        return pila.pop().toString();
+    }
 }
